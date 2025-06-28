@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact PEN'HOUSE Conciergerie - Sarthe & Perche</title>
+    <meta name="description" content="Contactez PEN'HOUSE Conciergerie pour votre projet location courte durée en Sarthe, Perche, Duneau. Demandez un devis, échangez avec Manon (réponse 24h).">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@700&family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="icon" href="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1749509388883-Le_bon_logo@2000x2000.png" type="image/png">
+</head>
+<body class="bg-beige-creme text-black font-lato">
+
+    <div id="root" class="flex flex-col min-h-screen">
+        <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+            <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1749509388883-Le_bon_logo@2000x2000.png" alt="Logo PenHouse Conciergerie Sarthe Perche" class="h-12 w-12 mr-2">
+                    <span class="font-abhaya text-2xl tracking-tight">PEN'HOUSE</span>
+                </a>
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-black hover:text-or-gold transition-colors duration-300">Accueil</a>
+                    <a href="a_propos.html" class="text-black hover:text-or-gold transition-colors duration-300">À propos</a>
+                    <a href="services.html" class="text-black hover:text-or-gold transition-colors duration-300">Nos Services</a>
+                    <a href="processus.html" class="text-black hover:text-or-gold transition-colors duration-300">Le Processus</a>
+                    <a href="faq.html" class="text-black hover:text-or-gold transition-colors duration-300">FAQ</a>
+                    <a href="contact.html" class="bg-or-gold text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300">Contact</a>
+                </nav>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" class="lucide lucide-menu w-6 h-6"><path d="M4 12h16"></path><path d="M4 18h16"></path><path d="M4 6h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden md:hidden bg-white/95">
+                <a href="index.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">Accueil</a>
+                <a href="a_propos.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">À propos</a>
+                <a href="services.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">Nos Services</a>
+                <a href="processus.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">Le Processus</a>
+                <a href="faq.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">FAQ</a>
+                <a href="contact.html" class="block py-3 px-6 text-center bg-or-gold text-white">Contact</a>
+            </div>
+        </header>
+
+        <main class="flex-grow">
+            <div class="bg-white">
+                <div class="container mx-auto px-6 py-16 md:py-24 text-center">
+                    <h1 class="text-4xl md:text-5xl mb-4">Contactez Pen'House Conciergerie</h1>
+                    <p class="text-lg max-w-3xl mx-auto">Déléguez en toute confiance, gagnez du temps dès maintenant. Manon vous répond sous 24h.</p>
+                </div>
+            </div>
+
+            <section class="py-16 md:py-24">
+                <div class="container mx-auto px-6 max-w-5xl">
+                    <div class="flex flex-wrap -mx-4">
+                        <div class="w-full lg:w-2/3 px-4">
+                            <div class="mb-8">
+                                <div class="border-b border-gray-300">
+                                    <nav class="-mb-px flex space-x-6" aria-label="Tabs">
+                                        <button id="tab-proprietaire" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-or-gold text-or-gold">
+                                            Je suis Propriétaire
+                                        </button>
+                                        <button id="tab-voyageur" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                                            Je suis Voyageur
+                                        </button>
+                                        <button id="tab-partenaire" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">
+                                            Je suis Partenaire
+                                        </button>
+                                    </nav>
+                                </div>
+                                <div class="bg-white p-8 rounded-b-lg shadow-lg">
+                                    <!-- FORMULAIRE PROPRIÉTAIRE - MODIFIÉ POUR NETLIFY -->
+                                    <div id="form-proprietaire" class="form-content">
+                                        <form name="contact-proprietaire" method="POST" netlify class="space-y-4">
+                                            <div class="grid md:grid-cols-2 gap-4">
+                                                <input type="text" name="nom" placeholder="Nom" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required>
+                                                <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required>
+                                            </div>
+                                            <input type="tel" name="telephone" placeholder="Téléphone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold">
+                                            <input type="text" name="localisation_bien" placeholder="Localisation du bien (Ville, Code Postal)" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required>
+                                            <select name="type_bien" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold">
+                                                <option>Type de bien</option>
+                                                <option>Maison</option>
+                                                <option>Appartement</option>
+                                                <option>Autre</option>
+                                            </select>
+                                            <textarea name="message" placeholder="Vos attentes / votre projet" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required></textarea>
+                                            <div>
+                                                <label class="flex items-center text-sm text-gray-600">
+                                                    <input type="checkbox" name="acceptation_rgpd" class="form-checkbox h-4 w-4 text-or-gold" required>
+                                                    <span class="ml-2">J'accepte que mes données soient utilisées uniquement pour être recontacté dans le cadre de ma demande. <a href="mentions_legales.html" class="underline hover:text-or-gold">En savoir plus</a></span>
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="w-full bg-or-gold text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 font-bold">Envoyer ma demande</button>
+                                        </form>
+                                    </div>
+                                    
+                                    <!-- FORMULAIRE VOYAGEUR - MODIFIÉ POUR NETLIFY -->
+                                    <div id="form-voyageur" class="form-content hidden">
+                                       <form name="contact-voyageur" method="POST" netlify class="space-y-4">
+                                            <div class="grid md:grid-cols-2 gap-4">
+                                               <input type="text" name="nom" placeholder="Nom" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required>
+                                               <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required>
+                                            </div>
+                                            <input type="tel" name="telephone" placeholder="Téléphone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold">
+                                            <input type="text" name="periode_sejour" placeholder="Période de séjour souhaitée" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold">
+                                            <textarea name="message" placeholder="Votre recherche (type de bien, localisation...)" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required></textarea>
+                                            <div>
+                                                <label class="flex items-center text-sm text-gray-600">
+                                                    <input type="checkbox" name="acceptation_rgpd" class="form-checkbox h-4 w-4 text-or-gold" required>
+                                                    <span class="ml-2">J'accepte que mes données soient utilisées uniquement pour être recontacté dans le cadre de ma demande. <a href="mentions_legales.html" class="underline hover:text-or-gold">En savoir plus</a></span>
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="w-full bg-or-gold text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 font-bold">Envoyer ma demande</button>
+                                        </form>
+                                    </div>
+                                    
+                                    <!-- FORMULAIRE PARTENAIRE - MODIFIÉ POUR NETLIFY -->
+                                    <div id="form-partenaire" class="form-content hidden">
+                                        <form name="contact-partenaire" method="POST" netlify class="space-y-4">
+                                            <div class="grid md:grid-cols-2 gap-4">
+                                               <input type="text" name="nom" placeholder="Nom ou Nom de l'entreprise" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required>
+                                               <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required>
+                                            </div>
+                                            <input type="tel" name="telephone" placeholder="Téléphone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold">
+                                            <textarea name="message" placeholder="Votre proposition de partenariat" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required></textarea>
+                                            <div>
+                                                <label class="flex items-center text-sm text-gray-600">
+                                                    <input type="checkbox" name="acceptation_rgpd" class="form-checkbox h-4 w-4 text-or-gold" required>
+                                                    <span class="ml-2">J'accepte que mes données soient utilisées uniquement pour être recontacté dans le cadre de ma demande. <a href="mentions_legales.html" class="underline hover:text-or-gold">En savoir plus</a></span>
+                                                </label>
+                                            </div>
+                                            <button type="submit" class="w-full bg-or-gold text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 font-bold">Envoyer ma demande</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-1/3 px-4 mt-12 lg:mt-0">
+                            <div class="bg-white p-8 rounded-lg shadow-lg">
+                                <h3 class="text-2xl mb-6">Contact direct</h3>
+                                <div class="space-y-4">
+                                    <a href="tel:0698374670" class="flex items-center text-lg hover:text-or-gold transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="phone" class="lucide lucide-phone w-6 h-6 mr-4 text-or-gold"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+                                        <span>06 98 37 46 70</span>
+                                    </a>
+                                     <a href="mailto:contact@penhouse-conciergerie.fr" class="flex items-center text-lg hover:text-or-gold transition-colors">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="mail" class="lucide lucide-mail w-6 h-6 mr-4 text-or-gold"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect x="2" y="4" width="20" height="16" rx="2"></rect></svg>
+                                        <span>contact@penhouse-conciergerie.fr</span>
+                                    </a>
+                                </div>
+                                <div class="mt-8 pt-6 border-t border-gray-200">
+                                     <a href="https://calendly.com/contact-penhouse-conciergerie" target="_blank" class="w-full block text-center bg-black text-white px-6 py-3 rounded-full hover:bg-opacity-80 transition-all duration-300 flex items-center justify-center gap-2 mb-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="calendar" class="lucide lucide-calendar"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>Prendre RDV sur Calendly
+                                    </a>
+                                </div>
+                                <div class="flex justify-center space-x-6 mt-6">
+                                    <a href="https://www.instagram.com/penhouseconciergerie" target="_blank" class="text-gray-500 hover:text-or-gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="instagram" class="lucide lucide-instagram w-7 h-7"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+                                    <a href="https://www.facebook.com/people/PenHouse-Conciergerie/61575965848309/" target="_blank" class="text-gray-500 hover:text-or-gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="facebook" class="lucide lucide-facebook w-7 h-7"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                                    <a href="https://www.linkedin.com/in/manon-peneau-457601360/" target="_blank" class="text-gray-500 hover:text-or-gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin w-7 h-7"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-black text-white">
+            <div class="container mx-auto px-6 py-12">
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-xl mb-4">PEN'HOUSE Conciergerie</h3>
+                        <p class="text-sm text-gray-400">Accompagnement humain et sur-mesure pour la location courte durée en Sarthe & Perche.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl mb-4">Navigation</h3>
+                        <ul class="space-y-2 text-sm">
+                            <li><a href="index.html" class="hover:text-or-gold">Accueil</a></li>
+                            <li><a href="a_propos.html" class="hover:text-or-gold">À propos</a></li>
+                            <li><a href="services.html" class="hover:text-or-gold">Nos Services</a></li>
+                            <li><a href="processus.html" class="hover:text-or-gold">Le Processus</a></li>
+                            <li><a href="faq.html" class="hover:text-or-gold">FAQ</a></li>
+                            <li><a href="contact.html" class="hover:text-or-gold">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl mb-4">Contact</h3>
+                        <ul class="space-y-2 text-sm text-gray-400">
+                            <li>Pen'House Conciergerie</li>
+                            <li><a href="mailto:contact@penhouse-conciergerie.fr" class="hover:text-or-gold">contact@penhouse-conciergerie.fr</a></li>
+                            <li><a href="tel:0698374670" class="hover:text-or-gold">06 98 37 46 70</a></li>
+                        </ul>
+                        <div class="flex space-x-4 mt-4">
+                            <a href="https://www.instagram.com/penhouseconciergerie" target="_blank" class="hover:text-or-gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="instagram" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+                            <a href="https://www.facebook.com/people/PenHouse-Conciergerie/61575965848309/" target="_blank" class="hover:text-or-gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="facebook" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+                            <a href="https://www.linkedin.com/in/manon-peneau-457601360/" target="_blank" class="hover:text-or-gold"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="linkedin" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-800 mt-8 pt-6 text-center text-sm text-gray-500">
+                    <p>PEN'HOUSE Conciergerie - SIREN 944 163 385</p>
+                    <p>© 2025 PEN'HOUSE Conciergerie. Tous droits réservés. <a href="mentions_legales.html" class="underline hover:text-or-gold">Mentions Légales & RGPD</a></p>
+                    <p class="mt-2 text-xs">Conception Pen'House</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script type="module" src="script.js"></script>
+    <script type="module" src="contact_form.js"></script>
+
+</body>
+</html>
