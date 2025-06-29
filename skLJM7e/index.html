@@ -128,30 +128,35 @@
                  <div class="container mx-auto px-6 flex flex-wrap items-center">
                     <div class="w-full md:w-1/2 p-4">
                                             <div class="w-full md:w-1/2 p-4">
-                        <h2 class="text-3xl md:text-4xl mb-4">Recevez gratuitement notre guide exclusif</h2>
-                        <p class="mb-6">Recevez notre guide "5 Conseils pour louer sans stress" et commencez à optimiser votre location dès aujourd'hui.</p>
-                 <form name="guide-premium" method="POST" data-netlify="true" action="/guide-premium.html" class="space-y-4">
-  <input type="hidden" name="form-name" value="guide-premium" />
-  <input type="text" name="prenom" placeholder="Prénom" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
-  <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
-  <div>
-    <label class="flex items-center text-sm">
-      <input type="checkbox" name="acceptation" class="form-checkbox h-4 w-4 text-or-gold" required />
-      <span class="ml-2">J'accepte que mes données soient utilisées uniquement pour être recontacté dans le cadre de ma demande.</span>
-    </label>
+ <section class="py-16 md:py-24 bg-beige-creme">
+  <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center">
+    <!-- Form and Text -->
+    <div class="w-full md:w-1/2 p-4">
+      <div class="mb-8 text-center">
+        <h2 class="text-3xl md:text-4xl mb-4">Recevez gratuitement notre guide exclusif</h2>
+        <p class="mb-6">Recevez notre guide "5 Conseils pour louer sans stress" et commencez à optimiser votre location dès aujourd'hui.</p>
+      </div>
+      <form name="guide-premium" method="POST" data-netlify="true" action="/guide-premium.html" class="space-y-4">
+        <input type="hidden" name="form-name" value="guide-premium" />
+        <input type="text" name="prenom" placeholder="Prénom" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
+        <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
+        <div>
+          <label class="flex items-center text-sm">
+            <input type="checkbox" name="acceptation" class="form-checkbox h-4 w-4 text-or-gold" required />
+            <span class="ml-2">J'accepte que mes données soient utilisées uniquement pour être recontacté dans le cadre de ma demande.</span>
+          </label>
+        </div>
+        <button type="submit" class="w-full bg-or-gold text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 font-bold">
+          Recevoir mon guide
+        </button>
+      </form>
+    </div>
+    <!-- Image -->
+    <div class="w-full md:w-1/2 p-4 flex justify-center">
+      <img src="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1750951373583-image-1750951365251-toxp5w6ou@2688x1536.png" alt="Guide location courte durée Sarthe" class="max-w-full h-auto rounded-lg shadow-md">
+    </div>
   </div>
-  <button type="submit" class="w-full bg-or-gold text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 font-bold">
-    Recevoir mon guide
-  </button>
-</form>
-
-
-                    <div class="w-full md:w-1/2 p-4 flex justify-center">
-                       <img src="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1750951373583-image-1750951365251-toxp5w6ou@2688x1536.png" alt="Guide location courte durée Sarthe" class="rounded-lg shadow-xl max-w-sm w-full">
-                    </div>
-                </div>
-            </section>
-
+</section>
              <section class="py-16 md:py-24 bg-white">
                 <div class="container mx-auto px-6 text-center">
                     <h2 class="text-3xl md:text-4xl mb-4">Prêt(e) à retrouver votre sérénité ?</h2>
