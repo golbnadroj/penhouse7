@@ -1,0 +1,47 @@
+---
+# This is a layout file consumed by Eleventy. Do not modify front matter fields here.
+---
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | PEN'HOUSE Conciergerie</title>
+    <meta name="description" content="{{ description }}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@700&family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind via CDN (simple for static hosting) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="/style.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1749509388883-Le_bon_logo@2000x2000.png" type="image/png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1XDLW0RYWN"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1XDLW0RYWN');
+    </script>
+</head>
+<body class="bg-beige-creme text-black font-lato">
+    <div id="root" class="flex flex-col min-h-screen">
+        {% include "header.html" %}
+
+        <main class="flex-grow">
+            {{ content | safe }}
+        </main>
+
+        {% include "footer.html" %}
+    </div>
+
+    <!-- Icons & custom scripts -->
+    <script src="/script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,9 @@
+# Node dependencies
+node_modules/
+
+# Build output
+_site/
+dist/
+
+# macOS metadata
+.DS_Store 

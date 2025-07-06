@@ -1,0 +1,30 @@
+<!-- Header Include: shared across all pages with Eleventy layout -->
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+        <a href="index.html" class="flex items-center">
+            <img src="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1749509388883-Le_bon_logo@2000x2000.png" alt="Logo PenHouse Conciergerie Sarthe Perche" class="h-12 w-12 mr-2">
+            <span class="font-abhaya text-2xl tracking-tight">PEN'HOUSE</span>
+        </a>
+        <nav class="hidden md:flex items-center space-x-8">
+            <a href="index.html" class="text-black hover:text-or-gold transition-colors duration-300">Accueil</a>
+            <a href="a_propos.html" class="text-black hover:text-or-gold transition-colors duration-300">À propos</a>
+            <a href="services.html" class="text-black hover:text-or-gold transition-colors duration-300">Nos Services</a>
+            <a href="processus.html" class="text-black hover:text-or-gold transition-colors duration-300">Le Processus</a>
+            <a href="faq.html" class="text-black hover:text-or-gold transition-colors duration-300">FAQ</a>
+            <a href="contact.html" class="bg-or-gold text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition-all duration-300">Contact</a>
+        </nav>
+        <div class="md:hidden">
+            <button id="mobile-menu-button" class="p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="menu" class="lucide lucide-menu w-6 h-6"><path d="M4 12h16"></path><path d="M4 18h16"></path><path d="M4 6h16"></path></svg>
+            </button>
+        </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-white/95">
+        <a href="index.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">Accueil</a>
+        <a href="a_propos.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">À propos</a>
+        <a href="services.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">Nos Services</a>
+        <a href="processus.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">Le Processus</a>
+        <a href="faq.html" class="block py-2 px-6 text-center text-black hover:bg-beige-creme">FAQ</a>
+        <a href="contact.html" class="block py-3 px-6 text-center bg-or-gold text-white">Contact</a>
+    </div>
+</header> 

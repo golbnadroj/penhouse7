@@ -1,0 +1,12 @@
+{
+    "name": "penhouse-conciergerie-site",
+    "version": "1.0.0",
+    "description": "Static site for PEN'HOUSE Conciergerie built with Eleventy",
+    "scripts": {
+      "build": "eleventy",
+      "dev": "eleventy --serve --watch"
+    },
+    "devDependencies": {
+      "@11ty/eleventy": "^2.0.1"
+    }
+  } 
