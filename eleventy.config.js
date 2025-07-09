@@ -7,7 +7,12 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.setTemplateFormats(["html", "njk", "md"]);
 
   eleventyConfig.addGlobalData("eleventyComputed", {
-    permalink: data => data.page.fileSlug + ".html"
+    permalink: data => {
+      if (data.page.filePathStem === "/index") {
+        return "index.html";
+      }
+      return data.page.fileSlug + ".html";
+    }
   });
 
   return {
