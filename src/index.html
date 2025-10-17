@@ -73,31 +73,6 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
     </div>
 </section>
 
-<!-- Guide Section -->
-<section class="pt-2 md:pt-4 pb-12 md:pb-16 bg-beige-creme">
-    <div class="container mx-auto px-6 flex flex-wrap items-center">
-        <div class="w-full md:w-1/2 p-4">
-            <h2 class="text-3xl md:text-4xl mb-4">Recevez gratuitement notre guide exclusif</h2>
-            <p class="mb-6">Recevez notre guide "5 Conseils pour louer sans stress" et commencez à optimiser votre location dès aujourd'hui.</p>
-            <form name="guide-premium" method="POST" data-netlify="true" action="/guide-premium.html" class="space-y-4">
-                <input type="hidden" name="form-name" value="guide-premium" />
-                <input type="text" name="prenom" placeholder="Prénom" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
-                <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
-                <div>
-                    <label class="flex items-center text-sm">
-                        <input type="checkbox" name="acceptation" class="form-checkbox h-4 w-4 text-or-gold" required />
-                        <span class="ml-2">J'accepte que mes données soient utilisées uniquement pour être recontacté dans le cadre de ma demande.</span>
-                    </label>
-                </div>
-                <button type="submit" class="w-full bg-or-gold text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 font-bold">Recevoir mon guide</button>
-            </form>
-        </div>
-        <div class="w-full md:w-1/2 p-4 flex justify-center">
-            <img src="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1750951373583-image-1750951365251-toxp5w6ou@2688x1536.png" alt="Guide location courte durée Sarthe" class="max-w-full h-auto rounded-lg shadow-md">
-        </div>
-    </div>
-</section>
-
 <!-- CTA -->
 <section class="py-16 md:py-24 bg-white">
     <div class="container mx-auto px-6 text-center">
@@ -116,3 +91,297 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
         </div>
     </div>
 </section>
+
+<!-- Guide Popover -->
+<button id="guide-toggle" aria-controls="guide-popover" aria-expanded="false" class="fixed right-6 bottom-6 z-40 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2">
+    <span>Audit gratuit</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+    </svg>
+</button>
+
+<div id="guide-popover" class="fixed bottom-20 right-6 md:bottom-20 md:right-6 z-50 hidden">
+    <div class="relative bg-white rounded-t-2xl md:rounded-2xl shadow-lg w-[min(90vw,24rem)] max-h-[90vh] overflow-y-auto">
+        <button type="button" id="guide-close" class="hidden md:flex absolute top-4 right-4 z-10 w-9 h-9 items-center justify-center rounded-full backdrop-blur-md bg-white/30 hover:bg-white/50 text-white border-0 transition-all shadow-lg">
+            <span class="sr-only">Fermer</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+        <div class="flex justify-center pt-3 pb-2 cursor-grab active:cursor-grabbing md:hidden" id="swipe-handle-wrapper">
+            <div class="w-12 h-1 bg-gray-300 rounded-full"></div>
+        </div>
+        
+        <div class="flex flex-col">
+            <img src="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1750951373583-image-1750951365251-toxp5w6ou@2688x1536.png" alt="Guide location courte duree Sarthe" class="w-full h-48 object-cover object-top">
+            <div class="p-5 space-y-3">
+                <h2 class="text-2xl">Demandez votre audit gratuit</h2>
+                <form name="audit-gratuit" method="POST" data-netlify="true" action="/audit-gratuit.html" class="space-y-3">
+                    <input type="hidden" name="form-name" value="audit-gratuit" />
+                    <input type="text" name="prenom" placeholder="Prenom" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
+                    <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
+                    <input type="tel" name="telephone" placeholder="Telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required title="Veuillez entrer un numero de telephone francais valide" />
+                    <label class="flex items-start text-sm">
+                        <input type="checkbox" name="acceptation" class="form-checkbox h-4 w-4 text-or-gold mt-1" required />
+                        <span class="ml-2">J'accepte que mes donnees soient utilisees uniquement pour etre recontacte dans le cadre de ma demande. <a href="mentions_legales.html" class="text-or-gold hover:underline">En savoir plus</a></span>
+                    </label>
+                    <button type="submit" class="w-full bg-or-gold text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-all duration-300 font-bold">Demander mon audit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+#guide-popover {
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#guide-popover.open {
+    pointer-events: auto;
+    opacity: 1;
+}
+
+@media (min-width: 769px) {
+    #guide-popover {
+        transform: translateY(12px) scale(0.98);
+    }
+
+    #guide-popover.open {
+        transform: translateY(0) scale(1);
+    }
+
+    #guide-popover > div {
+        width: 24rem;
+        border-radius: 1rem;
+    }
+}
+
+#guide-toggle {
+    max-width: calc(100vw - 2rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(218, 165, 32, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+#guide-toggle:hover {
+    background: rgba(218, 165, 32, 0.85);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+#guide-toggle:active {
+    transform: scale(0.98);
+}
+
+#guide-toggle svg {
+    transition: transform 0.3s ease;
+}
+
+#guide-toggle.guide-toggle-open svg {
+    transform: rotate(180deg);
+}
+
+/* Mobile bottom sheet styles */
+@media (max-width: 768px) {
+    #guide-popover {
+        bottom: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+    }
+    
+    #guide-popover > div {
+        width: 100% !important;
+        border-radius: 1rem 1rem 0 0 !important;
+    }
+    
+    #guide-popover:not(.open) {
+        opacity: 0 !important;
+        transform: translateY(100%) !important;
+    }
+    
+    #guide-popover.open {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    var toggleButton = document.getElementById('guide-toggle');
+    var popover = document.getElementById('guide-popover');
+    var closeButton = document.getElementById('guide-close');
+    // Desktop close button + mobile swipe handle
+    var hideTimeout;
+
+    var openPopover = function () {
+        window.clearTimeout(hideTimeout);
+        if (popover) {
+            popover.classList.remove('hidden');
+            window.requestAnimationFrame(function () {
+                popover.classList.add('open');
+            });
+        }
+        if (toggleButton) {
+            toggleButton.setAttribute('aria-expanded', 'true');
+            toggleButton.classList.add('guide-toggle-open');
+        }
+    };
+
+    var closePopover = function () {
+        if (popover) {
+            popover.classList.remove('open');
+            hideTimeout = window.setTimeout(function () {
+                popover.classList.add('hidden');
+            }, 300);
+        }
+        if (toggleButton) {
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.classList.remove('guide-toggle-open');
+        }
+    };
+
+    if (toggleButton) {
+        toggleButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            if (popover && popover.classList.contains('open')) {
+                closePopover();
+            } else {
+                openPopover();
+            }
+        });
+    }
+
+    document.addEventListener('click', function (event) {
+        if (!popover || !popover.classList.contains('open')) {
+            return;
+        }
+        if ((popover && popover.contains(event.target)) || (toggleButton && toggleButton.contains(event.target))) {
+            return;
+        }
+        closePopover();
+    });
+
+    document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') {
+            closePopover();
+        }
+    });
+
+    
+    // Universal swipe-to-close (works on mobile and desktop)
+    var swipeHandleWrapper = document.getElementById('swipe-handle-wrapper');
+    var popoverContent = popover ? popover.firstElementChild : null;
+    var startY = 0;
+    var startX = 0;
+    var currentY = 0;
+    var currentX = 0;
+    var isDragging = false;
+    var isMobile = window.innerWidth < 768;
+    
+    function initSwipe(element) {
+        if (!element || !popover) return;
+        
+        // Touch events (mobile)
+        element.addEventListener('touchstart', function(e) {
+            startY = e.touches[0].clientY;
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            if (popoverContent) popoverContent.style.transition = 'none';
+        }, { passive: true });
+        
+        element.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            currentY = e.touches[0].clientY;
+            currentX = e.touches[0].clientX;
+            var diffY = currentY - startY;
+            
+            if (diffY > 0) {
+                if (popoverContent) {
+                    popoverContent.style.transform = 'translateY(' + diffY + 'px)';
+                }
+            }
+        }, { passive: true });
+        
+        element.addEventListener('touchend', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            if (popoverContent) popoverContent.style.transition = '';
+            
+            var diffY = currentY - startY;
+            if (diffY > 100) {
+                closePopover();
+            } else {
+                if (popoverContent) popoverContent.style.transform = '';
+            }
+        });
+        
+        // Mouse events (desktop)
+        element.addEventListener('mousedown', function(e) {
+            startY = e.clientY;
+            startX = e.clientX;
+            isDragging = true;
+            if (popoverContent) popoverContent.style.transition = 'none';
+            e.preventDefault();
+        });
+        
+        document.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            currentY = e.clientY;
+            currentX = e.clientX;
+            var diffY = currentY - startY;
+            
+            if (diffY > 0) {
+                if (popoverContent) {
+                    popoverContent.style.transform = 'translateY(' + diffY + 'px)';
+                }
+            }
+        });
+        
+        document.addEventListener('mouseup', function(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            if (popoverContent) popoverContent.style.transition = '';
+            
+            var diffY = currentY - startY;
+            if (diffY > 100) {
+                closePopover();
+            } else {
+                if (popoverContent) popoverContent.style.transform = '';
+            }
+        });
+    }
+    
+    if (swipeHandleWrapper) {
+        initSwipe(swipeHandleWrapper);
+    }
+
+    if (closeButton) {
+        closeButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            closePopover();
+        });
+    }
+
+    var auditForm = document.forms['audit-gratuit'];
+    if (auditForm) {
+        var phoneInput = auditForm.querySelector('input[name="telephone"]');
+        if (phoneInput) {
+            phoneInput.addEventListener('input', function() {
+                phoneInput.setCustomValidity('');
+            });
+        }
+    }
+});
+</script>
+
+
