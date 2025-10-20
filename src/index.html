@@ -193,10 +193,14 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
 /* Mobile bottom sheet styles */
 @media (max-width: 768px) {
     #guide-popover {
+        top: 0 !important;
         bottom: 0 !important;
         right: 0 !important;
         left: 0 !important;
         width: 100% !important;
+        height: 100% !important;
+        display: flex !important;
+        align-items: flex-end !important;
     }
     
     #guide-popover > div {
@@ -217,7 +221,8 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
 
 /* Prevent background scroll when interacting with the sheet on mobile */
 #swipe-handle-wrapper { touch-action: none; }
-#guide-popover { overscroll-behavior: contain; }
+#guide-popover, #guide-popover > div { overscroll-behavior: contain; }
+html.no-overscroll, body.no-overscroll { overscroll-behavior: none; }
 </style>
 
 <script>
@@ -241,6 +246,8 @@ document.addEventListener('DOMContentLoaded', function () {
             toggleButton.classList.add('guide-toggle-open');
         }
         lockScroll();
+        document.documentElement.classList.add('no-overscroll');
+        document.body.classList.add('no-overscroll');
     };
 
     var closePopover = function () {
@@ -249,6 +256,8 @@ document.addEventListener('DOMContentLoaded', function () {
             hideTimeout = window.setTimeout(function () {
                 popover.classList.add('hidden');
                 unlockScroll();
+                document.documentElement.classList.remove('no-overscroll');
+                document.body.classList.remove('no-overscroll');
             }, 300);
         }
         if (toggleButton) {
@@ -318,18 +327,24 @@ document.addEventListener('DOMContentLoaded', function () {
     
     function initSwipe(element) {
         if (!element || !popover) return;
+        var isHandle = element.id === 'swipe-handle-wrapper';
+        var startScrollTop = 0;
         
         // Touch events (mobile)
         element.addEventListener('touchstart', function(e) {
             startY = e.touches[0].clientY;
             startX = e.touches[0].clientX;
+            startScrollTop = popoverContent ? popoverContent.scrollTop : 0;
+            // Allow drag if started on handle or sheet is scrolled to top
+            isDragging = isHandle || startScrollTop <= 0;
             isDragging = true;
             if (popoverContent) popoverContent.style.transition = 'none';
-        }, { passive: true });
+        }, { passive: false });
         
         element.addEventListener('touchmove', function(e) {
             if (!isDragging) return;
             // prevent background scroll by locking body (set on open)
+            e.preventDefault();
             currentY = e.touches[0].clientY;
             currentX = e.touches[0].clientX;
             var diffY = currentY - startY;
@@ -339,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     popoverContent.style.transform = 'translateY(' + diffY + 'px)';
                 }
             }
-        }, { passive: true });
+        }, { passive: false });
         
         element.addEventListener('touchend', function(e) {
             if (!isDragging) return;
@@ -393,6 +408,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (swipeHandleWrapper) {
         initSwipe(swipeHandleWrapper);
     }
+    if (popoverContent) {
+        initSwipe(popoverContent);
+    }
+
+    // Prevent pull-to-refresh outside the sheet when open
+    document.addEventListener('touchmove', function(e) {
+        if (popover && popover.classList.contains('open')) {
+            if (!popoverContent || !popoverContent.contains(e.target)) {
+                e.preventDefault();
+            }
+        }
+    }, { passive: false });
 
     if (closeButton) {
         closeButton.addEventListener('click', function(event) {
