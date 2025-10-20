@@ -365,44 +365,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function lockScroll() {
         if (isScrollLocked) return;
-        scrollPosition = window.pageYOffset || document.documentElement.scrollTop || 0;
-        if (isIOS) {
-            document.body.style.position = 'fixed';
-            document.body.style.top = '-' + scrollPosition + 'px';
-            document.body.style.left = '0';
-            document.body.style.right = '0';
-            document.body.style.width = '100%';
-            document.body.style.overflow = 'hidden';
-        } else {
-            var sbw = window.innerWidth - document.documentElement.clientWidth;
-            if (sbw > 0) {
-                document.body.style.paddingRight = sbw + 'px';
-            }
-            document.documentElement.style.overflow = 'hidden';
-            document.body.style.overflow = 'hidden';
-        }
+        // Lock only body to avoid affecting header/sticky elements
+        document.body.style.overflow = 'hidden';
         isScrollLocked = true;
     }
 
     function unlockScroll() {
         if (!isScrollLocked) return;
-        var prevScrollBehavior = document.documentElement.style.scrollBehavior;
-        document.documentElement.style.scrollBehavior = 'auto';
-        if (isIOS) {
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.left = '';
-            document.body.style.right = '';
-            document.body.style.width = '';
-            document.body.style.overflow = '';
-            window.scrollTo(0, scrollPosition || 0);
-        } else {
-            document.documentElement.style.overflow = '';
-            document.body.style.overflow = '';
-            document.body.style.paddingRight = '';
-            // No need to scrollTo here; position didn't change with overflow lock
-        }
-        document.documentElement.style.scrollBehavior = prevScrollBehavior || '';
+        document.body.style.overflow = '';
+        document.body.style.paddingRight = '';
+        // Do not force scrollTo; leave position untouched to avoid jumps
         isScrollLocked = false;
     }
     
