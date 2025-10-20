@@ -137,7 +137,7 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
 #guide-popover {
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.3s ease;
 }
 
 #guide-popover.open {
@@ -148,6 +148,7 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
 @media (min-width: 769px) {
     #guide-popover {
         transform: translateY(12px) scale(0.98);
+        transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     #guide-popover.open {
@@ -206,17 +207,13 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
     #guide-popover > div {
         width: 100% !important;
         border-radius: 1rem 1rem 0 0 !important;
+        will-change: transform;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        max-height: calc(100dvh - 2rem) !important;
     }
     
-    #guide-popover:not(.open) {
-        opacity: 0 !important;
-        transform: translateY(100%) !important;
-    }
-    
-    #guide-popover.open {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
+    #guide-popover.open > div { transform: translateY(0); }
 }
 
 /* Prevent background scroll when interacting with the sheet on mobile */
@@ -239,6 +236,9 @@ document.addEventListener('DOMContentLoaded', function () {
             popover.classList.remove('hidden');
             window.requestAnimationFrame(function () {
                 popover.classList.add('open');
+                if (popover.firstElementChild) {
+                    popover.firstElementChild.style.transform = '';
+                }
             });
         }
         if (toggleButton) {
@@ -302,10 +302,12 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentY = 0;
     var currentX = 0;
     var isDragging = false;
+    var canDrag = false;
     var isMobile = window.innerWidth < 768;
     var scrollPosition = 0;
 
     function lockScroll() {
+        if (!isMobile) return;
         scrollPosition = window.pageYOffset || document.documentElement.scrollTop || 0;
         document.body.style.position = 'fixed';
         document.body.style.top = '-' + scrollPosition + 'px';
@@ -316,6 +318,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function unlockScroll() {
+        if (!isMobile) return;
         document.body.style.position = '';
         document.body.style.top = '';
         document.body.style.left = '';
@@ -335,8 +338,8 @@ document.addEventListener('DOMContentLoaded', function () {
             startY = e.touches[0].clientY;
             startX = e.touches[0].clientX;
             startScrollTop = popoverContent ? popoverContent.scrollTop : 0;
-            // Allow drag if started on handle or sheet is scrolled to top
-            isDragging = isHandle || startScrollTop <= 0;
+            // Allow drag only if started on handle or sheet is at top
+            canDrag = isHandle || startScrollTop <= 0;
             isDragging = true;
             if (popoverContent) popoverContent.style.transition = 'none';
         }, { passive: false });
@@ -344,12 +347,12 @@ document.addEventListener('DOMContentLoaded', function () {
         element.addEventListener('touchmove', function(e) {
             if (!isDragging) return;
             // prevent background scroll by locking body (set on open)
-            e.preventDefault();
             currentY = e.touches[0].clientY;
             currentX = e.touches[0].clientX;
             var diffY = currentY - startY;
             
-            if (diffY > 0) {
+            if (canDrag && diffY > 0) {
+                e.preventDefault();
                 if (popoverContent) {
                     popoverContent.style.transform = 'translateY(' + diffY + 'px)';
                 }
@@ -362,7 +365,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (popoverContent) popoverContent.style.transition = '';
             
             var diffY = currentY - startY;
-            if (diffY > 100) {
+            if (canDrag && diffY > 100) {
                 closePopover();
             } else {
                 if (popoverContent) popoverContent.style.transform = '';
