@@ -94,7 +94,8 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
 
 <!-- Guide Popover -->
 <button id="guide-toggle" aria-controls="guide-popover" aria-expanded="false" class="fixed right-6 bottom-6 z-40 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2">
-    <span>Audit gratuit</span>
+    <span class="hidden md:inline">Je demande mon audit gratuit</span>
+    <span class="md:hidden">Audit gratuit</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
     </svg>
@@ -213,6 +214,10 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
         transform: translateY(0) !important;
     }
 }
+
+/* Prevent background scroll when interacting with the sheet on mobile */
+#swipe-handle-wrapper { touch-action: none; }
+#guide-popover { overscroll-behavior: contain; }
 </style>
 
 <script>
@@ -235,6 +240,7 @@ document.addEventListener('DOMContentLoaded', function () {
             toggleButton.setAttribute('aria-expanded', 'true');
             toggleButton.classList.add('guide-toggle-open');
         }
+        lockScroll();
     };
 
     var closePopover = function () {
@@ -242,6 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
             popover.classList.remove('open');
             hideTimeout = window.setTimeout(function () {
                 popover.classList.add('hidden');
+                unlockScroll();
             }, 300);
         }
         if (toggleButton) {
@@ -287,6 +294,27 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentX = 0;
     var isDragging = false;
     var isMobile = window.innerWidth < 768;
+    var scrollPosition = 0;
+
+    function lockScroll() {
+        scrollPosition = window.pageYOffset || document.documentElement.scrollTop || 0;
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + scrollPosition + 'px';
+        document.body.style.left = '0';
+        document.body.style.right = '0';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+    }
+
+    function unlockScroll() {
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.left = '';
+        document.body.style.right = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, scrollPosition || 0);
+    }
     
     function initSwipe(element) {
         if (!element || !popover) return;
@@ -301,6 +329,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         element.addEventListener('touchmove', function(e) {
             if (!isDragging) return;
+            // prevent background scroll by locking body (set on open)
             currentY = e.touches[0].clientY;
             currentX = e.touches[0].clientX;
             var diffY = currentY - startY;
