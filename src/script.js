@@ -2,12 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    // No cross-component auto-closing
 
     if (mobileMenuButton && mobileMenu) {
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
     }
+    // No listeners related to guide popover
 
     // --- CGV Side Navigation Logic ---
     const navLinks = document.querySelectorAll('.nav-link');

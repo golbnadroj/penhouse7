@@ -93,7 +93,7 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
 </section>
 
 <!-- Guide Popover -->
-<button id="guide-toggle" aria-controls="guide-popover" aria-expanded="false" class="fixed right-6 bottom-6 z-40 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2">
+<button id="guide-toggle" aria-controls="guide-popover" aria-expanded="false" aria-haspopup="dialog" class="fixed right-6 bottom-6 z-40 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2">
     <span class="hidden md:inline">Je demande mon audit gratuit</span>
     <span class="md:hidden">Audit gratuit</span>
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -101,9 +101,9 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
     </svg>
 </button>
 
-<div id="guide-popover" class="fixed bottom-20 right-6 md:bottom-20 md:right-6 z-40 hidden">
+<div id="guide-popover" class="fixed bottom-20 right-6 md:bottom-20 md:right-6 z-40 hidden" role="dialog" aria-modal="true" aria-labelledby="guide-title">
     <div class="relative bg-white rounded-t-2xl md:rounded-2xl shadow-lg w-[min(90vw,24rem)] max-h-[90vh] overflow-y-auto">
-        <button type="button" id="guide-close" class="hidden md:flex absolute top-4 right-4 z-10 w-9 h-9 items-center justify-center rounded-full backdrop-blur-md bg-white/30 hover:bg-white/50 text-white border-0 transition-all shadow-lg">
+        <button type="button" id="guide-close" class="flex absolute top-3 right-3 z-10 w-10 h-10 items-center justify-center rounded-full bg-black/60 text-white border-0 transition-all shadow-md">
             <span class="sr-only">Fermer</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
@@ -116,12 +116,12 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
         <div class="flex flex-col">
             <img src="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1750951373583-image-1750951365251-toxp5w6ou@2688x1536.png" alt="Guide location courte duree Sarthe" class="w-full h-48 object-cover object-top">
             <div class="p-5 space-y-3">
-                <h2 class="text-2xl">Demandez votre audit gratuit</h2>
-                <form name="audit-gratuit" method="POST" data-netlify="true" action="/audit-gratuit.html" class="space-y-3">
+                <h2 class="text-2xl" id="guide-title">Demandez votre audit gratuit</h2>
+                <form name="audit-gratuit" method="POST" data-netlify="true" action="/audit-gratuit.html" class="space-y-3" autocomplete="on">
                     <input type="hidden" name="form-name" value="audit-gratuit" />
-                    <input type="text" name="prenom" placeholder="Prenom" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
-                    <input type="email" name="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
-                    <input type="tel" name="telephone" placeholder="Telephone" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required title="Veuillez entrer un numero de telephone francais valide" />
+                    <input type="text" name="prenom" placeholder="Prenom" inputmode="text" autocomplete="given-name" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
+                    <input type="email" name="email" placeholder="Email" inputmode="email" autocomplete="email" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required />
+                    <input type="tel" name="telephone" placeholder="Telephone" inputmode="tel" autocomplete="tel" pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$" class="w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-or-gold" required title="Veuillez entrer un numero de telephone francais valide" />
                     <label class="flex items-start text-sm">
                         <input type="checkbox" name="acceptation" class="form-checkbox h-4 w-4 text-or-gold mt-1" required />
                         <span class="ml-2">J'accepte que mes donnees soient utilisees uniquement pour etre recontacte dans le cadre de ma demande. <a href="mentions_legales.html" class="text-or-gold hover:underline">En savoir plus</a></span>
@@ -227,6 +227,15 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
 #swipe-handle-wrapper { touch-action: none; }
 #guide-popover, #guide-popover > div { overscroll-behavior: contain; }
 body.no-overscroll { overscroll-behavior: none; }
+/* Prevent iOS zoom on input focus and improve tap targets */
+input, select, textarea, button { font-size: 16px; }
+/* Smooth scrolling inside sheet on iOS */
+#guide-popover > div { -webkit-overflow-scrolling: touch; }
+@supports (height: 100svh) {
+  @media (max-width: 768px) {
+    #guide-popover > div { max-height: 100svh !important; }
+  }
+}
 </style>
 
 <script>
@@ -253,6 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 window.requestAnimationFrame(function () {
                     popover.classList.add('open');
                     sheet.style.transform = '';
+                    setTimeout(function(){ try { sheet.style.transform = 'none'; } catch(e) {} }, 360);
                 });
             } else {
                 window.requestAnimationFrame(function () {
@@ -266,6 +276,11 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (isMobile) {
             document.body.classList.add('no-overscroll');
+        }
+        // autofocus first input for quicker typing
+        var firstInput = popover ? popover.querySelector('input[name="prenom"]') : null;
+        if (firstInput) {
+            setTimeout(function(){ try { firstInput.focus({ preventScroll: false }); } catch(e) {} }, 60);
         }
     };
 
@@ -310,6 +325,7 @@ document.addEventListener('DOMContentLoaded', function () {
             toggleButton.setAttribute('aria-expanded', 'false');
             toggleButton.classList.remove('guide-toggle-open');
         }
+        // No custom events
     };
 
     if (toggleButton) {
@@ -382,6 +398,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!element || !popover) return;
         var isHandle = element.id === 'swipe-handle-wrapper';
         var startScrollTop = 0;
+        function isInteractive(el){
+            return !!(el && (el.closest('input, textarea, select, button') || el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT' || el.tagName === 'BUTTON'));
+        }
         
         // Touch events (mobile)
         element.addEventListener('touchstart', function(e) {
@@ -389,6 +408,7 @@ document.addEventListener('DOMContentLoaded', function () {
             startX = e.touches[0].clientX;
             startScrollTop = popoverContent ? popoverContent.scrollTop : 0;
             // Allow drag only if started on handle or sheet is at top
+            if (!isHandle && isInteractive(e.target)) { canDrag = false; isDragging = false; return; }
             canDrag = isHandle || startScrollTop <= 0;
             isDragging = true;
             if (popoverContent) popoverContent.style.transition = 'none';
@@ -401,7 +421,7 @@ document.addEventListener('DOMContentLoaded', function () {
             currentX = e.touches[0].clientX;
             var diffY = currentY - startY;
             
-            if (canDrag && diffY > 0) {
+            if (canDrag && diffY > 12) {
                 e.preventDefault();
                 if (popoverContent) {
                     popoverContent.style.transform = 'translateY(' + diffY + 'px)';
@@ -469,9 +489,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (swipeHandleWrapper) {
         initSwipe(swipeHandleWrapper);
     }
-    if (popoverContent) {
-        initSwipe(popoverContent);
-    }
+    // Only the handle is draggable to avoid conflicts with inputs
 
     // Prevent pull-to-refresh outside the sheet when open
     document.addEventListener('touchmove', function(e) {
@@ -497,6 +515,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 phoneInput.setCustomValidity('');
             });
         }
+        // keep focused input visible above the keyboard
+        auditForm.addEventListener('focus', function(e){
+            var t = e.target;
+            if (!t) return;
+            var sheet = popover ? popover.firstElementChild : null;
+            if (!sheet) return;
+            setTimeout(function(){
+                try {
+                    var rect = t.getBoundingClientRect();
+                    var srect = sheet.getBoundingClientRect();
+                    var desired = sheet.scrollTop + (rect.top - srect.top) - 80;
+                    sheet.scrollTo({ top: Math.max(0, desired), behavior: 'smooth' });
+                } catch(e) {}
+            }, 120);
+        }, true);
     }
 });
 </script>
