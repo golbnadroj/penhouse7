@@ -211,9 +211,15 @@ description: "Conciergerie courte durée humaine & locale en Sarthe, Perche, Dun
         transform: translateY(100%);
         transition: transform 0.3s ease;
         max-height: calc(100dvh - 2rem) !important;
+        margin-bottom: calc(env(safe-area-inset-bottom, 0px) + 16px) !important;
     }
     
     #guide-popover.open > div { transform: translateY(0); }
+}
+
+/* Keep header above and stable on mobile while sheet is open */
+@media (max-width: 768px) {
+  body.sheet-open header { position: fixed !important; top: 0; left: 0; right: 0; width: 100%; z-index: 1000; }
 }
 
 /* Prevent background scroll when interacting with the sheet on mobile */
@@ -255,8 +261,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         if (isMobile) {
             lockScroll();
-            document.documentElement.classList.add('no-overscroll');
             document.body.classList.add('no-overscroll');
+            document.body.classList.add('sheet-open');
         }
     };
 
@@ -277,6 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     unlockScroll();
                     document.documentElement.classList.remove('no-overscroll');
                     document.body.classList.remove('no-overscroll');
+                    document.body.classList.remove('sheet-open');
                 };
                 sheet.addEventListener('transitionend', onEnd, { once: true });
                 hideTimeout = window.setTimeout(function () {
@@ -289,6 +296,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     unlockScroll();
                     document.documentElement.classList.remove('no-overscroll');
                     document.body.classList.remove('no-overscroll');
+                    document.body.classList.remove('sheet-open');
                 }, 320);
             } else {
                 popover.classList.remove('open');
