@@ -233,12 +233,17 @@ document.addEventListener('DOMContentLoaded', function () {
     var openPopover = function () {
         window.clearTimeout(hideTimeout);
         if (popover) {
+            var sheet = popover.firstElementChild;
             popover.classList.remove('hidden');
+            if (sheet) {
+                sheet.style.transition = 'transform 0.3s ease';
+                sheet.style.transform = 'translateY(100%)';
+                // force reflow to ensure starting position is applied
+                void sheet.offsetHeight;
+            }
             window.requestAnimationFrame(function () {
                 popover.classList.add('open');
-                if (popover.firstElementChild) {
-                    popover.firstElementChild.style.transform = '';
-                }
+                if (sheet) sheet.style.transform = '';
             });
         }
         if (toggleButton) {
@@ -252,13 +257,44 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var closePopover = function () {
         if (popover) {
-            popover.classList.remove('open');
-            hideTimeout = window.setTimeout(function () {
-                popover.classList.add('hidden');
-                unlockScroll();
-                document.documentElement.classList.remove('no-overscroll');
-                document.body.classList.remove('no-overscroll');
-            }, 300);
+            var sheet = popover.firstElementChild;
+            var finished = false;
+            if (sheet) {
+                sheet.style.transition = 'transform 0.3s ease';
+                sheet.style.transform = 'translateY(100%)';
+                var onEnd = function (e) {
+                    if (finished) return;
+                    finished = true;
+                    sheet.removeEventListener('transitionend', onEnd);
+                    popover.classList.remove('open');
+                    popover.classList.add('hidden');
+                    sheet.style.transform = '';
+                    unlockScroll();
+                    document.documentElement.classList.remove('no-overscroll');
+                    document.body.classList.remove('no-overscroll');
+                };
+                sheet.addEventListener('transitionend', onEnd, { once: true });
+                // Fallback in case transitionend doesn't fire
+                hideTimeout = window.setTimeout(function () {
+                    if (finished) return;
+                    finished = true;
+                    sheet.removeEventListener('transitionend', onEnd);
+                    popover.classList.remove('open');
+                    popover.classList.add('hidden');
+                    sheet.style.transform = '';
+                    unlockScroll();
+                    document.documentElement.classList.remove('no-overscroll');
+                    document.body.classList.remove('no-overscroll');
+                }, 320);
+            } else {
+                popover.classList.remove('open');
+                hideTimeout = window.setTimeout(function () {
+                    popover.classList.add('hidden');
+                    unlockScroll();
+                    document.documentElement.classList.remove('no-overscroll');
+                    document.body.classList.remove('no-overscroll');
+                }, 300);
+            }
         }
         if (toggleButton) {
             toggleButton.setAttribute('aria-expanded', 'false');
@@ -366,7 +402,15 @@ document.addEventListener('DOMContentLoaded', function () {
             
             var diffY = currentY - startY;
             if (canDrag && diffY > 100) {
-                closePopover();
+                // animate sheet to close position then close
+                if (popoverContent) {
+                    popoverContent.style.transition = 'transform 0.2s ease';
+                    popoverContent.style.transform = 'translateY(100%)';
+                }
+                setTimeout(function(){
+                    if (popoverContent) popoverContent.style.transition = '';
+                    closePopover();
+                }, 180);
             } else {
                 if (popoverContent) popoverContent.style.transform = '';
             }
