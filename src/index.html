@@ -235,34 +235,39 @@ document.addEventListener('DOMContentLoaded', function () {
         if (popover) {
             var sheet = popover.firstElementChild;
             popover.classList.remove('hidden');
-            if (sheet) {
+            if (isMobile && sheet) {
                 sheet.style.transition = 'transform 0.3s ease';
                 sheet.style.transform = 'translateY(100%)';
-                // force reflow to ensure starting position is applied
                 void sheet.offsetHeight;
+                window.requestAnimationFrame(function () {
+                    popover.classList.add('open');
+                    sheet.style.transform = '';
+                });
+            } else {
+                window.requestAnimationFrame(function () {
+                    popover.classList.add('open');
+                });
             }
-            window.requestAnimationFrame(function () {
-                popover.classList.add('open');
-                if (sheet) sheet.style.transform = '';
-            });
         }
         if (toggleButton) {
             toggleButton.setAttribute('aria-expanded', 'true');
             toggleButton.classList.add('guide-toggle-open');
         }
-        lockScroll();
-        document.documentElement.classList.add('no-overscroll');
-        document.body.classList.add('no-overscroll');
+        if (isMobile) {
+            lockScroll();
+            document.documentElement.classList.add('no-overscroll');
+            document.body.classList.add('no-overscroll');
+        }
     };
 
     var closePopover = function () {
         if (popover) {
             var sheet = popover.firstElementChild;
             var finished = false;
-            if (sheet) {
+            if (isMobile && sheet) {
                 sheet.style.transition = 'transform 0.3s ease';
                 sheet.style.transform = 'translateY(100%)';
-                var onEnd = function (e) {
+                var onEnd = function () {
                     if (finished) return;
                     finished = true;
                     sheet.removeEventListener('transitionend', onEnd);
@@ -274,7 +279,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.body.classList.remove('no-overscroll');
                 };
                 sheet.addEventListener('transitionend', onEnd, { once: true });
-                // Fallback in case transitionend doesn't fire
                 hideTimeout = window.setTimeout(function () {
                     if (finished) return;
                     finished = true;
@@ -290,9 +294,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 popover.classList.remove('open');
                 hideTimeout = window.setTimeout(function () {
                     popover.classList.add('hidden');
-                    unlockScroll();
-                    document.documentElement.classList.remove('no-overscroll');
-                    document.body.classList.remove('no-overscroll');
                 }, 300);
             }
         }
@@ -348,7 +349,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentX = 0;
     var isDragging = false;
     var canDrag = false;
-    var isMobile = window.innerWidth < 768;
+    var isMobile = window.matchMedia('(max-width: 768px)').matches;
     var scrollPosition = 0;
     var isScrollLocked = false;
     var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
