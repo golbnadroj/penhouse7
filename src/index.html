@@ -329,6 +329,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Close when tapping/clicking on the backdrop (outside the sheet)
+    if (popover) {
+        popover.addEventListener('click', function(e) {
+            if (e.target === popover) {
+                closePopover();
+            }
+        });
+    }
+
     
     // Universal swipe-to-close (works on mobile and desktop)
     var swipeHandleWrapper = document.getElementById('swipe-handle-wrapper');
