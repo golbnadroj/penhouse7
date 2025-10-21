@@ -8,6 +8,9 @@ module.exports = function(eleventyConfig) {
 
   eleventyConfig.addGlobalData("eleventyComputed", {
     permalink: data => {
+      if (data.permalink) {
+        return data.permalink;
+      }
       if (data.page.filePathStem === "/index") {
         return "index.html";
       }
