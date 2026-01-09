@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@700&family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+:root {
+    --or-gold: #bf953a;
+    --beige-creme: #f5f0e6;
+    --white: #ffffff;
+    --black: #000000;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    color: var(--black);
+    background-color: var(--beige-creme);
+}
+
+.font-abhaya {
+    font-family: 'Abhaya Libre', serif;
+}
+
+.font-lato {
+    font-family: 'Lato', sans-serif;
+}
+
+h1 {
+    font-family: 'Abhaya Libre', serif;
+}
+
+h2, h3, h4, h5, h6, details > summary {
+    font-family: 'Playfair Display', serif; /* Remplacement pour 'The Seasons' (police commerciale) */
+}
+
+.bg-or-gold { background-color: var(--or-gold); }
+.text-or-gold { color: var(--or-gold); }
+.border-or-gold { border-color: var(--or-gold); }
+.ring-or-gold { --tw-ring-color: var(--or-gold); }
+.bg-beige-creme { background-color: var(--beige-creme); }
+
+.prose a {
+    color: var(--or-gold);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.prose a:hover {
+    color: var(--black);
+}
+
+.form-checkbox:checked {
+    background-color: var(--or-gold);
+    border-color: var(--or-gold);
+}
+
+.tab-button.border-or-gold {
+    border-color: var(--or-gold);
+}
+
+.tab-button {
+    transition: all 0.3s ease;
+}
+
+.text-shadow-strong {
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.95);
+}

@@ -3,6 +3,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/script.js");
   eleventyConfig.addPassthroughCopy("src/contact_form.js");
   eleventyConfig.addPassthroughCopy("src/cgv-nav.js");
+  eleventyConfig.addPassthroughCopy("src/images");
 
   eleventyConfig.setTemplateFormats(["html", "njk", "md"]);
 
