@@ -61,3 +61,7 @@ h2, h3, h4, h5, h6, details > summary {
 .text-shadow-strong {
     text-shadow: 0 3px 8px rgba(0, 0, 0, 0.95);
 }
+
+#thumbnail-viewport {
+    overflow-anchor: none;
+}
