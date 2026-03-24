@@ -5,6 +5,17 @@
     --beige-creme: #f5f0e6;
     --white: #ffffff;
     --black: #000000;
+    --maintenance-bg-start: #f6f1e8;
+    --maintenance-bg-end: #ece1cf;
+    --maintenance-surface: rgba(255, 252, 246, 0.88);
+    --maintenance-border: rgba(191, 149, 58, 0.22);
+    --maintenance-copy: #35291a;
+    --maintenance-muted: #6f624f;
+}
+
+html,
+body {
+    min-height: 100%;
 }
 
 body {
@@ -64,4 +75,77 @@ h2, h3, h4, h5, h6, details > summary {
 
 #thumbnail-viewport {
     overflow-anchor: none;
+}
+
+.maintenance-body {
+    margin: 0;
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at top, rgba(191, 149, 58, 0.14), transparent 36%),
+        linear-gradient(160deg, var(--maintenance-bg-start), var(--maintenance-bg-end));
+    color: var(--maintenance-copy);
+}
+
+.maintenance-shell {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.maintenance-card {
+    width: min(100%, 42rem);
+    padding: 3rem;
+    border: 1px solid var(--maintenance-border);
+    border-radius: 1.75rem;
+    background: var(--maintenance-surface);
+    backdrop-filter: blur(12px);
+    text-align: center;
+}
+
+.maintenance-eyebrow {
+    margin: 0 0 1rem;
+    color: var(--or-gold);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.maintenance-card h1 {
+    margin: 0;
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    line-height: 1.05;
+}
+
+.maintenance-text {
+    max-width: 32rem;
+    margin: 1.5rem auto 0;
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: var(--maintenance-muted);
+}
+
+.maintenance-note {
+    margin: 2rem 0 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+    .maintenance-shell {
+        padding: 1.25rem;
+    }
+
+    .maintenance-card {
+        padding: 2.25rem 1.5rem;
+        border-radius: 1.25rem;
+    }
+
+    .maintenance-text {
+        font-size: 1rem;
+    }
 }

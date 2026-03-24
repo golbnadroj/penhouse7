@@ -6,9 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>{{ title }} | PEN'HOUSE Conciergerie</title>
-    <meta name="description" content="{{ description }}">
-
+    <title>{% if site.maintenanceMode %}{{ site.maintenance.title }} | {{ site.maintenance.brandName }}{% else %}{{ title }} | PEN'HOUSE Conciergerie{% endif %}</title>
+    <meta name="description" content="{% if site.maintenanceMode %}{{ site.maintenance.message }} {{ site.maintenance.details }}{% else %}{{ description }}{% endif %}">
+    {% if site.maintenanceMode %}
+    <meta name="robots" content="noindex, nofollow">
+    {% else %}
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,6 +18,7 @@
 
     <!-- Tailwind via CDN (simple for static hosting) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    {% endif %}
 
     <!-- Custom styles -->
     <link rel="stylesheet" href="/style.css">
@@ -23,14 +26,26 @@
     <!-- Favicon -->
     <link rel="icon" href="https://r2.flowith.net/files/dcccee8f-8e5a-4296-b394-af5385fae2cd/1749509388883-Le_bon_logo@2000x2000.png" type="image/png">
 
+    {% if not site.maintenanceMode %}
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-1XDLW0RYWN"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-1XDLW0RYWN');
     </script>
+    {% endif %}
 </head>
-<body class="bg-beige-creme text-black font-lato">
+<body class="{% if site.maintenanceMode %}maintenance-body{% else %}bg-beige-creme text-black font-lato{% endif %}">
+    {% if site.maintenanceMode %}
+    <main class="maintenance-shell" aria-labelledby="maintenance-title">
+        <section class="maintenance-card">
+            <p class="maintenance-eyebrow">{{ site.maintenance.brandName }}</p>
+            <h1 id="maintenance-title">{{ site.maintenance.message }}</h1>
+            <p class="maintenance-text">{{ site.maintenance.details }}</p>
+            <p class="maintenance-note">Merci de votre patience.</p>
+        </section>
+    </main>
+    {% else %}
     <div id="root" class="flex flex-col min-h-screen">
         {% include "header.html" %}
 
@@ -44,5 +59,6 @@
     <!-- Icons & custom scripts -->
     <script src="/script.js"></script>
     <script src="/contact_form.js"></script>
+    {% endif %}
 </body>
-</html> 
+</html>
